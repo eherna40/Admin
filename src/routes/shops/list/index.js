@@ -46,6 +46,7 @@ import classnames from "classnames";
 import moment from "moment";
 import './styles.css'
 import InputAC from '../../../components/InputAC'
+import { normalize, normalizeText } from "../../../util/Utils";
 
 
 
@@ -238,10 +239,8 @@ export default class extends Component {
 	
 		let res = false
 		const timestamp = firebase.firestore.FieldValue.serverTimestamp()
-		console.log(place_id)
 		const ref = await database.collection("LOCALS")
 		const exist = await ref.get().then(res => console.log(res.exists))
-		console.log(place_id)
 		await geoFirestore.set( place_id, { 
 			coordinates: new firebase.firestore.GeoPoint(geometry.location.lat(), geometry.location.lng())
 		})
@@ -378,8 +377,9 @@ export default class extends Component {
 		})
 		const nom = name.replace(' ', '')
 		const randomNumber = Math.floor(Math.random() * (100 - 0)) + 0
-		const password = Math.floor(Math.random() * (1000 - 0)) + 0
-		const user = nom.slice(0, 6) + randomNumber.toString()
+		const password = (Math.floor(Math.random() * (9000 - 0))).toString()
+		const usertemp = nom.slice(0, 6) + randomNumber.toString()
+		const user = normalizeText(usertemp).toLowerCase()
 		this.setState({
 			user,
 			password,

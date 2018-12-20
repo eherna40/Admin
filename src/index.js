@@ -4,7 +4,7 @@ const rootEl = document.getElementById("root");
 
 
 let render = () => {
-    const MainApp = require('./App').default;
+    const MainApp = require('./App').default
     ReactDOM.render(
       <MainApp />,
       rootEl
@@ -13,7 +13,7 @@ let render = () => {
 
 if (module.hot) {
   module.hot.accept('./App', () => {
-      const NextApp = require('./App').default;
+      const NextApp = require('./App').default
       render(
         <NextApp />,
         rootEl
